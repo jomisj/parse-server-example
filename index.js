@@ -19,7 +19,34 @@ var api = new ParseServer({
   serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
   liveQuery: {
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
+  },
+
+  // Additional OAuth supports
+  oauth: {
+   linkedin: {},
+   google: {}
+  },
+
+  // Enable email verification
+  verifyUserEmails: true,
+  emailVerifyTokenValidityDuration: 2 * 60 * 60, // in seconds (2 hours = 7200 seconds)
+  preventLoginWithUnverifiedEmail: false, // defaults to false
+  publicServerURL: process.env.SERVER_URL,
+  // Your apps name. This will appear in the subject and body of the emails that are sent.
+  appName: process.env.EMAIL_APP_NAME,
+  // The email adapter
+  emailAdapter: {
+    module: process.env.EMAIL_ADAPTER,
+    options: {
+      // The address that your emails come from
+      fromAddress: process.env.EMAIL_FROM,
+      // Your domain from mailgun.com
+      domain: process.env.EMAIL_DOMAIN,
+      // Your API key from mailgun.com
+      apiKey: process.env.EMAIL_API_KEY,
+    }
   }
+
 });
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
 // If you wish you require them, you can set them as options in the initialization above:
