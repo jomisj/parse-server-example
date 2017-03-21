@@ -22,7 +22,7 @@ var api = new ParseServer({
   },
 
   // Additional OAuth supports
-  oauth: {
+  auth: {
    linkedin: {},
    google: {}
   },
